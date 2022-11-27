@@ -1,0 +1,105 @@
+@import "Colors.module";
+
+.mainContents {
+  flex-grow: 1;
+  box-sizing: border-box;
+  transition: all 0.5s;
+  padding: 50px 10px 0 10px;
+  min-height: 100vh;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: end;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+.pageTitle {
+  padding: 5px;
+  color: $gray-300;
+  margin-bottom: 0;
+  margin-right: 5px;
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+.titleInput {
+  padding: 4px;
+  background: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  background: transparent;
+  font-size: 24px;
+  border: solid 1px $gray-600;
+  margin-right: 5px;
+  margin-top: 10px;
+  color: $gray-300;
+  flex-grow: 1;
+  font-weight: bold;
+  border-radius: 5px;
+  height: 36px;
+
+  &:focus {
+    border: 1px solid $primary-600;
+  }
+}
+
+.editButton {
+  background: $primary-500;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  padding: 5px 10px 5px 10px;
+  border-radius: 4px;
+  color: $gray-300;
+  margin-bottom: 5px;
+
+  &:hover {
+    background: $primary-600;
+  }
+  &:active {
+    background: $primary-350;
+  }
+}
+
+.panel {
+  background: $gray-800;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.editor {
+  -moz-appearance: none;
+  appearance: none;
+  resize: none;
+  border: 0;
+  outline: none;
+
+  min-height: 50vh;
+  box-sizing: border-box;
+  width: 100%;
+  background: transparent;
+  color: $gray-300;
+
+  &:focus {
+    border: solid 1px $primary-600;
+  }
+}
+
+.view {
+  min-height: 50vh;
+  color: $gray-300;
+  word-break: break-word;
+  code {
+    overflow: hidden;
+  }
+}
+
+.displayNone {
+  display: none;
+}

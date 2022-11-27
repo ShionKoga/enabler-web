@@ -1,0 +1,43 @@
+@import "Colors.module";
+
+.header {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: 50px;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  padding: 0 10px 0 10px;
+  backdrop-filter: blur(10px);
+}
+
+.sideBarButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  padding: 5px 10px 5px 10px;
+  border-radius: 4px;
+
+  &:hover {
+    background: $gray-800;
+  }
+  &:active {
+    background: $gray-700;
+  }
+}
+
+.sideBarImage {
+  width: 30px;
+  height: 25px;
+}
+
+.title {
+  color: $gray-300;
+  font-size: 25px;
+  margin: auto;
+}
+

@@ -1,0 +1,49 @@
+@import "Colors.module";
+
+.sideBar {
+  padding-top: 50px;
+  box-sizing: border-box;
+  width: 0;
+  height: 100vh;
+  background: $gray-900;
+  color: $gray-300;
+  transition: all 0.5s;
+  overflow: hidden;
+}
+
+.expand {
+  width: 300px;
+  padding: 50px 5px 0 5px;
+}
+
+%sideBarRow {
+  transition: all 0.3s;
+  border-radius: 5px;
+  padding: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  word-break: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+
+  &:hover {
+    background: $gray-700;
+  }
+
+  &:active {
+    background: $gray-600;
+  }
+}
+
+.title {
+  @extend %sideBarRow;
+}
+
+.addNew {
+  @extend %sideBarRow;
+}
+
+.selected {
+  background: $gray-800;
+}
