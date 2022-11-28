@@ -37,10 +37,6 @@ export default function App() {
         setShowAddNewContent(true)
     }
 
-    const getLastId = () => {
-        return contents.length
-    }
-
     return (
         <>
             <Header
@@ -58,7 +54,7 @@ export default function App() {
                     onSelectShowAddNew={onSelectShowAddNew}
                 />
                 {showAddNewContent
-                    ? <AddNewContent lastId={getLastId()}/>
+                    ? <AddNewContent />
                     : <MainContent contentId={selectedContentId}/>
                 }
             </div>
