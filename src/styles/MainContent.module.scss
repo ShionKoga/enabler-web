@@ -1,11 +1,10 @@
 @import "./Colors.module";
 
 .mainContents {
-  flex-grow: 1;
   box-sizing: border-box;
-  transition: all 0.5s;
   padding: 50px 10px 0 10px;
   min-height: 100vh;
+  margin-left: 300px;
 }
 
 .pageHeader {
@@ -49,7 +48,7 @@
 }
 
 .editButton {
-  background: $primary-500;
+  background: $primary-600;
   border: none;
   cursor: pointer;
   outline: none;
@@ -60,15 +59,16 @@
   margin-bottom: 5px;
 
   &:hover {
-    background: $primary-600;
+    background: $primary-700;
   }
+
   &:active {
-    background: $primary-350;
+    background: $primary-500;
   }
 }
 
 .panel {
-  background: $gray-800;
+  background: $gray-700;
   padding: 10px;
   border-radius: 10px;
 }

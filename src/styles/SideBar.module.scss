@@ -1,39 +1,50 @@
 @import "./Colors.module";
 
 .sideBar {
-  padding-top: 50px;
+  position: fixed;
   box-sizing: border-box;
-  width: 0;
+  width: 300px;
   height: 100vh;
   background: $gray-900;
   color: $gray-300;
-  transition: all 0.5s;
   overflow: hidden;
-}
-
-.expand {
-  width: 300px;
-  padding: 50px 5px 0 5px;
+  padding-top: 60px;
+  overflow-y: scroll;
 }
 
 %sideBarRow {
-  transition: all 0.3s;
-  border-radius: 5px;
   padding: 5px;
-  overflow: hidden;
   cursor: pointer;
-  word-break: normal;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+  display: flex;
+  justify-content: space-between;
 
   &:hover {
     background: $gray-700;
   }
 
+  &:hover .optionButton {
+    display: flex;
+  }
+
   &:active {
     background: $gray-600;
   }
+}
+
+.selected {
+  background: $primary-600;
+
+  &:hover {
+    background: $primary-600;
+  }
+}
+
+.titleContainer {
+  overflow: hidden;
+  display: -webkit-box;
+  word-break: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .title {
@@ -42,8 +53,4 @@
 
 .addNew {
   @extend %sideBarRow;
-}
-
-.selected {
-  background: $gray-800;
 }

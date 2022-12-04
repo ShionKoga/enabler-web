@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   padding: 0 10px 0 10px;
-  backdrop-filter: blur(10px);
+  background: $gray-900;
 }
 
 .sideBarButton {
