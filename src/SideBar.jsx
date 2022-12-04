@@ -5,14 +5,14 @@ export default function SideBar(props) {
 
     return (
         <div className={styles.sideBar}>
-            {props.contents.map(content => (
+            {props.contents.map((content, index) => (
                 <div
                     key={content.id}
-                    className={props.selectedId === content.id && !props.selectAddNew
+                    className={props.selectedIndex === index && !props.selectAddNew
                         ? classNames(styles.title, styles.selected)
                         : styles.title
                     }
-                    onClick={() => props.onSelect(content.id)}
+                    onClick={() => props.onSelect(index)}
                 >
                     <div className={styles.titleContainer}>{content.title}</div>
                 </div>

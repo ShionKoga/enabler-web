@@ -6,14 +6,14 @@ export default function AddNewContent(props) {
     const [titleInput, setTitleInput] = useState('')
 
     const onClickSave = () => {
-        props.contentRepo.postContent({
+        props.didSaveContent({
             title: titleInput,
             body: markDownText,
         })
     }
 
     return (
-        <form className={styles.mainContents}>
+        <div className={styles.mainContents}>
             <div className={styles.pageHeader}>
                 <input
                     type="text"
@@ -32,6 +32,6 @@ export default function AddNewContent(props) {
                         value={markDownText}
                     />
             </div>
-        </form>
+        </div>
     )
 }

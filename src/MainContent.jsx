@@ -30,15 +30,12 @@ export default function MainContent(props) {
     }
 
     const onClickDeleteButton = () => {
-        props.contentRepo.deleteContent(props.contentId)
-            .then(data => {
-                console.log(data)
-            })
+        props.didDeleteContent(props.contentId)
     }
 
     const onClickSaveButton = () => {
         setPageEditMode(false)
-        props.contentRepo.putContent(props.contentId, content)
+        props.didChangeContent(props.contentId, content)
     }
 
     const onChangeTitleText = (event) => {
