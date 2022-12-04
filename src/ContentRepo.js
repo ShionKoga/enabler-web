@@ -23,4 +23,9 @@ export default class ContentRepo {
         const response = await axios.put(this.serverUrl + "/api/content/" + id, content)
         return response.data
     }
+
+    async deleteContent(id) {
+        const response = await axios.delete(this.serverUrl + "/api/content/" + id)
+        return response.data
+    }
 }

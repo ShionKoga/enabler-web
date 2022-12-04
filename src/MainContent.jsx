@@ -25,6 +25,17 @@ export default function MainContent(props) {
         setPageEditMode(true)
     }
 
+    const onClickCancelButton = () => {
+        setPageEditMode(false)
+    }
+
+    const onClickDeleteButton = () => {
+        props.contentRepo.deleteContent(props.contentId)
+            .then(data => {
+                console.log(data)
+            })
+    }
+
     const onClickSaveButton = () => {
         setPageEditMode(false)
         props.contentRepo.putContent(props.contentId, content)
@@ -40,7 +51,7 @@ export default function MainContent(props) {
 
     return (
         <div className={styles.mainContents}>
-            <form className={pageEditMode ? '' : styles.displayNone}>
+            <div className={pageEditMode ? '' : styles.displayNone}>
                 <div className={styles.pageHeader}>
                     <input
                         type="text"
@@ -48,7 +59,8 @@ export default function MainContent(props) {
                         value={content.title}
                         onChange={onChangeTitleText}
                     />
-                    <button className={styles.editButton} onClick={onClickSaveButton}>保存</button>
+                    <button className={styles.cancelButton} onClick={onClickCancelButton}>キャンセル</button>
+                    <button className={styles.primaryButton} onClick={onClickSaveButton}>保存</button>
                 </div>
                 <div className={styles.panel}>
                     <textarea
@@ -58,14 +70,15 @@ export default function MainContent(props) {
                         value={content.body}
                     />
                 </div>
-            </form>
+            </div>
 
             <div className={pageEditMode ? styles.displayNone : ''}>
                 <div className={styles.pageHeader}>
-                    <h2 className={pageEditMode ? classNames(styles.pageTitle, styles.displayNone) : styles.pageTitle}>
+                    <div className={pageEditMode ? classNames(styles.pageTitle, styles.displayNone) : styles.pageTitle}>
                         {content.title}
-                    </h2>
-                    <button className={styles.editButton} onClick={onClickEditButton}>編集</button>
+                    </div>
+                    <button className={styles.primaryButton} onClick={onClickEditButton}>編集</button>
+                    <button className={styles.dangerButton} onClick={onClickDeleteButton}>削除</button>
                 </div>
                 <div className={styles.panel}>
                     <ReactMarkdown className={styles.view} children={content.body}/>

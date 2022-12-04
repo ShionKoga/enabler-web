@@ -21,7 +21,7 @@ export default function AddNewContent(props) {
                     value={titleInput}
                     onChange={(e) => setTitleInput(e.target.value)}
                 />
-                <button className={styles.editButton} onClick={onClickSave}>save</button>
+                <button className={styles.primaryButton} onClick={onClickSave}>save</button>
             </div>
 
             <div className={styles.panel}>
