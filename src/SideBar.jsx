@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import styles from './SideBar.module.scss'
+import styles from './styles/SideBar.module.scss'
 
 export default function SideBar(props) {
 

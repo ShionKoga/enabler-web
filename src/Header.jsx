@@ -1,4 +1,4 @@
-import styles from './Header.module.scss'
+import styles from './styles/Header.module.scss'
 import sideBarLeft from './sidebarLeft.png'
 
 export default function Header(props) {

@@ -1,23 +1,15 @@
-import styles from './MainContent.module.scss'
+import styles from './styles/MainContent.module.scss'
 import {useState} from 'react'
-import axios from 'axios'
 
-export default function AddNewContent() {
+export default function AddNewContent(props) {
     const [markDownText, setMarkdownText] = useState('')
     const [titleInput, setTitleInput] = useState('')
 
     const onClickSave = () => {
-        const serverUrl = process.env.REACT_APP_SERVER_URL
-        axios.post(serverUrl + '/api/content', {
+        props.contentRepo.postContent({
             title: titleInput,
             body: markDownText,
         })
-            .then(res => {
-                console.log("success", res.status)
-            })
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     return (

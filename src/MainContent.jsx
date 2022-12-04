@@ -1,65 +1,75 @@
 import classNames from 'classnames'
-import styles from './MainContent.module.scss'
+import styles from './styles/MainContent.module.scss'
 import ReactMarkdown from 'react-markdown'
 import {useEffect, useState} from 'react'
-import axios from 'axios'
 
 
 export default function MainContent(props) {
     const [pageEditMode, setPageEditMode] = useState(false)
-    const [content, setContent] = useState(undefined)
-    const [markDownText, setMarkdownText] = useState('')
-    const [titleInput, setTitleInput] = useState('')
+    const [content, setContent] = useState({
+        id: props.contentId,
+        title: '',
+        body: '',
+    })
+
+    const getContent = async () => {
+        const result = await props.contentRepo.getContent(props.contentId)
+        setContent(result)
+    }
 
     useEffect(() => {
-        const serverUrl = process.env.REACT_APP_SERVER_URL
-        axios.get(serverUrl + '/api/content/' + props.contentId)
-            .then(res => {
-                setContent(res.data)
-                setMarkdownText(res.data.body)
-                setTitleInput(res.data.title)
-            })
+        getContent()
     }, [props])
 
     const onClickEditButton = () => {
-        setPageEditMode(!pageEditMode)
+        setPageEditMode(true)
+    }
+
+    const onClickSaveButton = () => {
+        setPageEditMode(false)
+        props.contentRepo.putContent(props.contentId, content)
     }
 
     const onChangeTitleText = (event) => {
-        setTitleInput(event.target.value)
+        setContent({...content, title: event.target.value})
     }
 
     const onChangeBodyText = (event) => {
-        setMarkdownText(event.target.value)
+        setContent({...content, body: event.target.value})
     }
 
     return (
         <div className={styles.mainContents}>
-            <div className={styles.pageHeader}>
-                <h2 className={pageEditMode ? classNames(styles.pageTitle, styles.displayNone) : styles.pageTitle}>
-                    {titleInput}
-                </h2>
-                <input
-                    type="text"
-                    className={pageEditMode ? styles.titleInput : classNames(styles.titleInput, styles.displayNone)}
-                    value={titleInput}
-                    onChange={onChangeTitleText}
-                />
-                <button className={styles.editButton} onClick={onClickEditButton}>
-                    {pageEditMode ? 'save' : 'edit'}
-                </button>
-            </div>
-
-            <div className={styles.panel}>
+            <form className={pageEditMode ? '' : styles.displayNone}>
+                <div className={styles.pageHeader}>
+                    <input
+                        type="text"
+                        className={styles.titleInput}
+                        value={content.title}
+                        onChange={onChangeTitleText}
+                    />
+                    <button onClick={onClickSaveButton}>保存</button>
+                </div>
+                <div className={styles.panel}>
                     <textarea
                         name="markdown"
-                        className={pageEditMode ? styles.editor : classNames(styles.editor, styles.displayNone)}
+                        className={styles.editor}
                         onChange={onChangeBodyText}
-                        value={markDownText}
+                        value={content.body}
                     />
-                <ReactMarkdown
-                    className={pageEditMode ? classNames(styles.view, styles.displayNone) : styles.view}
-                    children={markDownText}/>
+                </div>
+            </form>
+
+            <div className={pageEditMode ? styles.displayNone : ''}>
+                <div className={styles.pageHeader}>
+                    <h2 className={pageEditMode ? classNames(styles.pageTitle, styles.displayNone) : styles.pageTitle}>
+                        {content.title}
+                    </h2>
+                    <button className={styles.editButton} onClick={onClickEditButton}>編集</button>
+                </div>
+                <div className={styles.panel}>
+                    <ReactMarkdown className={styles.view} children={content.body}/>
+                </div>
             </div>
         </div>
     )

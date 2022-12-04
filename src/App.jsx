@@ -1,26 +1,27 @@
-import axios from 'axios'
 import {useEffect, useState} from 'react'
-import styles from './App.module.scss'
+import styles from './styles/App.module.scss'
 import Header from './Header'
 import SideBar from './SideBar'
 import MainContent from './MainContent'
 import AddNewContent from './AddNewContent'
 
-export default function App() {
+export default function App(props) {
     const [contents, setContents] = useState([])
     const [sideBarExpand, setSideBarExpand] = useState(true)
     const [selectedContentId, setSelectedContentId] = useState(0)
     const [showAddNewContent, setShowAddNewContent] = useState(true)
 
+    const getAllOverview = async () => {
+        const result = await props.contentRepo.getAllOverview()
+        if (result.length > 0) {
+            setShowAddNewContent(false)
+            setSelectedContentId(result[0].id)
+        }
+        setContents(result)
+    }
+
     useEffect(() => {
-        const serverUrl = process.env.REACT_APP_SERVER_URL
-        axios.get(serverUrl + '/api/content')
-            .then(res => {
-                if (res.data.length > 0) {
-                    setShowAddNewContent(false)
-                }
-                setContents(res.data)
-            })
+        getAllOverview()
     }, [])
 
     const onClickSideBarButton = () => {
@@ -54,8 +55,8 @@ export default function App() {
                     onSelectShowAddNew={onSelectShowAddNew}
                 />
                 {showAddNewContent
-                    ? <AddNewContent />
-                    : <MainContent contentId={selectedContentId}/>
+                    ? <AddNewContent contentRepo={props.contentRepo}/>
+                    : <MainContent contentRepo={props.contentRepo} contentId={selectedContentId}/>
                 }
             </div>
         </>
