@@ -48,7 +48,7 @@ export default function MainContent(props) {
                         value={content.title}
                         onChange={onChangeTitleText}
                     />
-                    <button onClick={onClickSaveButton}>保存</button>
+                    <button className={styles.editButton} onClick={onClickSaveButton}>保存</button>
                 </div>
                 <div className={styles.panel}>
                     <textarea
